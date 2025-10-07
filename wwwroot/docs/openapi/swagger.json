@@ -1,0 +1,2037 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "GmasSocialCare - V1",
+    "version": "v1.0"
+  },
+  "paths": {
+    "/api/v1/Security/login": {
+      "post": {
+        "tags": ["Security"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login exitoso",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                    "tokenType": "Bearer",
+                    "username": "Ivan495",
+                    "expiresAt": "2025-05-06T23:01:23.8370323Z"
+                  },
+                  "message": "INF002: Successful login for user Ivan495.",
+                  "status": true,
+                  "statusCode": "SUCCESS"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Campos inválidos o faltantes",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": null,
+                  "message": "The Username field is required.",
+                  "status": false,
+                  "statusCode": "BAD_REQUEST"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciales inválidas",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": null,
+                  "message": "ERR004: Invalid username or password.",
+                  "status": false,
+                  "statusCode": "INVALID_CREDENTIALS"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Customers": {
+      "get": {
+        "tags": ["Customers"],
+        "responses": {
+          "200": {
+            "description": "Proceso exitoso",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": [],
+                  "message": "INF009: Customers found successfully.",
+                  "status": true,
+                  "statusCode": "SUCCESS"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["Customers"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/v1/Customers/{id}": {
+      "get": {
+        "tags": ["Customers"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["Customers"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Customers"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/v1/Customers/bulk": {
+      "post": {
+        "tags": ["Customers"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["Customers"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/v1/Invoices": {
+      "get": {
+        "tags": ["Invoices"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["Invoices"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceHeader"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceHeader"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceHeader"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/v1/Invoices/{id}": {
+      "get": {
+        "tags": ["Invoices"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["Invoices"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceHeader"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceHeader"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceHeader"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Invoices"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/v1/Invoices/bulk": {
+      "post": {
+        "tags": ["Invoices"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/InvoiceHeader"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/InvoiceHeader"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/InvoiceHeader"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["Invoices"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/InvoiceHeader"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/InvoiceHeader"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/InvoiceHeader"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/v1/Products": {
+      "get": {
+        "tags": ["Products"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["Products"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/v1/Products/{id}": {
+      "get": {
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/v1/Products/bulk": {
+      "post": {
+        "tags": ["Products"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["Products"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/v1/Vendors": {
+      "get": {
+        "tags": ["Vendors"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["Vendors"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vendor"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vendor"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vendor"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/v1/Vendors/{id}": {
+      "get": {
+        "tags": ["Vendors"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["Vendors"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vendor"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vendor"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vendor"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Vendors"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/v1/Vendors/bulk": {
+      "post": {
+        "tags": ["Vendors"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Vendor"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Vendor"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Vendor"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["Vendors"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Vendor"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Vendor"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Vendor"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Customer": {
+        "required": ["code", "firstName", "identificationType", "status"],
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "userCreatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "userUpdatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "identificationType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "province": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "lastUpdate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "externalId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "erpId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "refCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InvoiceHeader": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "userCreatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "userUpdatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "branchCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documentTypeCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "pixelDocumentID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "invoiceID": {
+            "type": "string",
+            "nullable": true
+          },
+          "invoiceSequence": {
+            "type": "string",
+            "nullable": true
+          },
+          "cashRegister": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "salesTypeCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "clientCode": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "subtotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "discount": {
+            "type": "number",
+            "format": "double"
+          },
+          "taxCode": {
+            "type": "number",
+            "format": "double"
+          },
+          "tax": {
+            "type": "number",
+            "format": "double"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
+          "tax2": {
+            "type": "number",
+            "format": "double"
+          },
+          "tax3": {
+            "type": "number",
+            "format": "double"
+          },
+          "tax2Able": {
+            "type": "number",
+            "format": "double"
+          },
+          "tax3Able": {
+            "type": "number",
+            "format": "double"
+          },
+          "gratuityAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "integrationStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "invoiceLine": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvoiceLine"
+            },
+            "nullable": true
+          },
+          "invoicePayment": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvoicePayment"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InvoiceLine": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "userCreatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "userUpdatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documentTypeCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "invoiceSequence": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "purchaseOrderNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "noLine": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "service": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipAmount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "productCode": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "warehouseCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "unitPriceExclTax": {
+            "type": "number",
+            "format": "double"
+          },
+          "subtotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "discount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "taxCode": {
+            "type": "number",
+            "format": "double"
+          },
+          "applyTax1": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "applyTax2": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "applyTax3": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "tax": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "tax2": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "tax3": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "unitPriceInclTax": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "total": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InvoicePayment": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "userCreatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "userUpdatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documentTypeCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productLine": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentMethodCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paymentDetailsDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "paymentDocumentDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "paymentCardCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "giftCardPayment": {
+            "type": "number",
+            "format": "double"
+          },
+          "cardPayment": {
+            "type": "number",
+            "format": "double"
+          },
+          "paymentAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "change": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "default": "1715003057",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "default": "12345678",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Product": {
+        "required": [
+          "description",
+          "isAssembly",
+          "priceA",
+          "priceMode",
+          "refCode",
+          "status",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "userCreatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "userUpdatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "refCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "productGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "priceA": {
+            "type": "number",
+            "format": "double"
+          },
+          "priceB": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "priceC": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "priceD": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "priceE": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "priceF": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "priceG": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "priceH": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "priceI": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "priceJ": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "priceMode": {
+            "type": "number",
+            "format": "double"
+          },
+          "measureUnit": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAssembly": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Vendor": {
+        "required": ["code", "firstName", "identificationType", "status"],
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "userCreatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "userUpdatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "identificationType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "province": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "lastUpdate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "externalId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "erpId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "refCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApplicationMessages": {
+        "type": "object",
+        "readOnly": true,
+        "description": "Mensajes de aplicación y códigos de estado personalizados",
+        "properties": {
+          "ApplicationStatusCodes": {
+            "type": "object",
+            "description": "Códigos de estado personalizados",
+            "properties": {
+              "SUCCESS": {
+                "type": "string",
+                "example": "Operación completada exitosamente."
+              },
+              "CREATED": {
+                "type": "string",
+                "example": "Recurso creado correctamente."
+              },
+              "DELETED": {
+                "type": "string",
+                "example": "Recurso eliminado correctamente."
+              },
+              "REQUEST_DELETED": {
+                "type": "string",
+                "example": "Solicitud de eliminación procesada exitosamente."
+              },
+              "BAD_REQUEST": {
+                "type": "string",
+                "example": "La solicitud contiene parámetros faltantes o inválidos."
+              },
+              "NOT_FOUND": {
+                "type": "string",
+                "example": "El recurso solicitado no fue encontrado."
+              },
+              "INVALID_CREDENTIALS": {
+                "type": "string",
+                "example": "Las credenciales proporcionadas son inválidas."
+              },
+              "INVALID_TOKEN": {
+                "type": "string",
+                "example": "El token proporcionado es inválido."
+              },
+              "UNAUTHORIZED": {
+                "type": "string",
+                "example": "El usuario no está autenticado."
+              },
+              "UNAUTHORIZED_OR_DISABLED_USER": {
+                "type": "string",
+                "example": "El usuario está inactivo o no tiene autorización."
+              },
+              "RESET_PASSWORD": {
+                "type": "string",
+                "example": "El usuario debe actualizar su contraseña o es su primer ingreso."
+              },
+              "INTERNAL_SERVER_ERROR": {
+                "type": "string",
+                "example": "Error interno del servidor."
+              },
+              "INTERNAL_REPOSITORY_ERROR": {
+                "type": "string",
+                "example": "Error interno en la capa de repositorio."
+              }
+            }
+          },
+          "ErrorCodes": {
+            "type": "object",
+            "description": "Códigos de error definidos por la aplicación",
+            "properties": {
+              "ERR001": {
+                "type": "string",
+                "example": "Parámetro requerido nulo o vacío."
+              },
+              "ERR002": {
+                "type": "string",
+                "example": "Error al ejecutar un procedimiento almacenado."
+              },
+              "ERR003": {
+                "type": "string",
+                "example": "Error general al ejecutar un servicio o una operación."
+              },
+              "ERR004": {
+                "type": "string",
+                "example": "Las credenciales del usuario son incorrectas."
+              },
+              "ERR005": {
+                "type": "string",
+                "example": "Identificador proporcionado no válido."
+              },
+              "ERR006": {
+                "type": "string",
+                "example": "La solicitud o sus parámetros están vacíos."
+              },
+              "ERR007": {
+                "type": "string",
+                "example": "No se pudo obtener información del usuario autenticado."
+              },
+              "ERR008": {
+                "type": "string",
+                "example": "Los parámetros enviados no coinciden con el usuario autenticado."
+              },
+              "ERR009": {
+                "type": "string",
+                "example": "Ya existe un registro con los mismos parámetros."
+              },
+              "ERR010": { "type": "string", "example": "Token no válido." },
+              "ERR011": {
+                "type": "string",
+                "example": "El cuerpo o los parámetros están vacíos."
+              },
+              "ERR012": {
+                "type": "string",
+                "example": "Token inválido o ya utilizado anteriormente."
+              },
+              "ERR013": {
+                "type": "string",
+                "example": "El aprobador no está autorizado o no es el correcto."
+              },
+              "ERR014": {
+                "type": "string",
+                "example": "No se pudo crear la notificación para el modelo."
+              },
+              "ERR015": {
+                "type": "string",
+                "example": "Error en la creación masiva de registros o creación parcial."
+              },
+              "ERR016": {
+                "type": "string",
+                "example": "No se encontraron registros para la entidad especificada."
+              },
+              "ERR017": {
+                "type": "string",
+                "example": "No se encontró la entidad por el ID especificado."
+              },
+              "ERR018": {
+                "type": "string",
+                "example": "No se encontró la entidad con la clave proporcionada."
+              },
+              "ERR019": {
+                "type": "string",
+                "example": "Error al crear una entidad."
+              },
+              "ERR020": {
+                "type": "string",
+                "example": "Error al actualizar una entidad."
+              },
+              "ERR021": {
+                "type": "string",
+                "example": "Error al eliminar una entidad."
+              }
+            }
+          },
+          "InfoCodes": {
+            "type": "object",
+            "description": "Mensajes informativos del sistema",
+            "properties": {
+              "INF001": {
+                "type": "string",
+                "example": "Ejecución de procedimiento almacenado iniciada."
+              },
+              "INF002": {
+                "type": "string",
+                "example": "Inicio de sesión exitoso del usuario."
+              },
+              "INF003": {
+                "type": "string",
+                "example": "Validación de token exitosa."
+              },
+              "INF004": {
+                "type": "string",
+                "example": "Solicitud eliminada debido a rechazo."
+              },
+              "INF005": {
+                "type": "string",
+                "example": "Notificación creada exitosamente para el modelo."
+              },
+              "INF006": {
+                "type": "string",
+                "example": "Registros masivos creados exitosamente."
+              },
+              "INF007": {
+                "type": "string",
+                "example": "Aprobación masiva completada con éxito."
+              },
+              "INF008": {
+                "type": "string",
+                "example": "Correo electrónico enviado exitosamente."
+              },
+              "INF009": {
+                "type": "string",
+                "example": "Registros encontrados exitosamente."
+              },
+              "INF010": {
+                "type": "string",
+                "example": "Entidad creada exitosamente."
+              },
+              "INF011": {
+                "type": "string",
+                "example": "Entidad actualizada exitosamente."
+              },
+              "INF012": {
+                "type": "string",
+                "example": "Entidad eliminada exitosamente."
+              },
+              "INF013": {
+                "type": "string",
+                "example": "Entidad recuperada exitosamente."
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "apiKey",
+        "description": "Standard Authorization header using the Bearer scheme (\"bearer {token}\")",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}
