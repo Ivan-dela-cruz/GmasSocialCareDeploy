@@ -1776,6 +1776,7 @@
           "GmasSocialCare.Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.OData": "9.3.2",
           "Newtonsoft.Json": "13.0.3",
+          "RazorLight": "2.3.1",
           "Serilog.AspNetCore": "9.0.0",
           "Serilog.Enrichers.AspNetCore": "1.0.0",
           "Serilog.Formatting.Compact": "3.0.0",
