@@ -41,6 +41,7 @@
           "GmasSocialCare.Application": "1.0.0",
           "GmasSocialCare.Core": "1.0.0",
           "GmasSocialCare.Domain": "1.0.0",
+          "GmasSocialCare.FileStorageManager": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.13",
           "Microsoft.AspNetCore.OData": "9.3.2",
           "Redoc.AspNetCore": "1.0.0",
@@ -1839,6 +1840,7 @@
       "GmasSocialCare.Domain/1.0.0": {
         "dependencies": {
           "AutoMapper": "14.0.0",
+          "GmasSocialCare.FileStorageManager": "1.0.0",
           "Newtonsoft.Json": "13.0.3",
           "Serilog.AspNetCore": "9.0.0",
           "Serilog.Enrichers.AspNetCore": "1.0.0",
