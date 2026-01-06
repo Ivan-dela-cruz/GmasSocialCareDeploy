@@ -41,6 +41,7 @@
           "GmasSocialCare.Application": "1.0.0",
           "GmasSocialCare.Core": "1.0.0",
           "GmasSocialCare.Domain": "1.0.0",
+          "GmasSocialCare.FileStorageManager": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.13",
           "Microsoft.AspNetCore.OData": "9.3.2",
           "Redoc.AspNetCore": "1.0.0",
@@ -411,6 +412,31 @@
         },
         "compile": {
           "lib/net8.0/AutoMapper.dll": {}
+        }
+      },
+      "AWSSDK.Core/3.7.303.9": {
+        "runtime": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.303.9"
+          }
+        },
+        "compile": {
+          "lib/net8.0/AWSSDK.Core.dll": {}
+        }
+      },
+      "AWSSDK.S3/3.7.307.10": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.303.9"
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.S3.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.307.10"
+          }
+        },
+        "compile": {
+          "lib/net8.0/AWSSDK.S3.dll": {}
         }
       },
       "Azure.Core/1.38.0": {
@@ -1814,6 +1840,7 @@
       "GmasSocialCare.Domain/1.0.0": {
         "dependencies": {
           "AutoMapper": "14.0.0",
+          "GmasSocialCare.FileStorageManager": "1.0.0",
           "Newtonsoft.Json": "13.0.3",
           "Serilog.AspNetCore": "9.0.0",
           "Serilog.Enrichers.AspNetCore": "1.0.0",
@@ -1831,10 +1858,26 @@
           "GmasSocialCare.Domain.dll": {}
         }
       },
+      "GmasSocialCare.FileStorageManager/1.0.0": {
+        "dependencies": {
+          "AWSSDK.S3": "3.7.307.10",
+          "GmasSocialCare.Core": "1.0.0"
+        },
+        "runtime": {
+          "GmasSocialCare.FileStorageManager.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "GmasSocialCare.FileStorageManager.dll": {}
+        }
+      },
       "GmasSocialCare.Infrastructure/1.0.0": {
         "dependencies": {
           "GmasSocialCare.Core": "1.0.0",
           "GmasSocialCare.Domain": "1.0.0",
+          "GmasSocialCare.FileStorageManager": "1.0.0",
           "Microsoft.AspNetCore.OData": "9.3.2",
           "Microsoft.EntityFrameworkCore": "9.0.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.2",
@@ -3603,6 +3646,20 @@
       "path": "automapper/14.0.0",
       "hashPath": "automapper.14.0.0.nupkg.sha512"
     },
+    "AWSSDK.Core/3.7.303.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qLR/coErSK0V+vZMHd9833UgNhQOmwNqEPcFiqYrd24a938lpKeO+GVERjNMyInysYwe+wCiOlU8l7BnHnC0Ow==",
+      "path": "awssdk.core/3.7.303.9",
+      "hashPath": "awssdk.core.3.7.303.9.nupkg.sha512"
+    },
+    "AWSSDK.S3/3.7.307.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-peyaPxQG34gLPFv/nifz2JZKIheNpYuQqvDnCO6jhZZbC4P8znQiEmMiZ5JcvXe9a0JQ3cKACRaUIngQetzSxQ==",
+      "path": "awssdk.s3/3.7.307.10",
+      "hashPath": "awssdk.s3.3.7.307.10.nupkg.sha512"
+    },
     "Azure.Core/1.38.0": {
       "type": "package",
       "serviceable": true,
@@ -4335,6 +4392,11 @@
       "sha512": ""
     },
     "GmasSocialCare.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GmasSocialCare.FileStorageManager/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
